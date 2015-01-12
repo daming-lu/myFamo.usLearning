@@ -22,8 +22,8 @@ define(function(require, exports, module) {
         _createContent.call(this);
 
         this.buttonBar.on('stateChange', function(index) {
-            //this.headerLightbox.show(this.content[index]);
-            this.contentLightbox.show(this.content[index]);
+            this.headerLightbox.show(this.content[index]);
+            //this.contentLightbox.show(this.content[index]);
 
         }.bind(this));
 
