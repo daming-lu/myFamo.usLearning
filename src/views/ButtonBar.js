@@ -22,17 +22,18 @@ define(function(require, exports, module) {
 
     function _createLayout() {
         this._layout = new GridLayout({
-            dimensions: [this.options.numButtons, 1] // col, row
+            dimensions: [this.options.numButtons, 2], // col, row
+            gutterSize: [2,2]
         });
 
         this.add(this._layout);
     }
 
     function _createButtons() {
-        //for(var j = 0; j<2; j++) {
+        for(var j = 0; j<2; j++) {
         for (var i = 0; i < this.options.numButtons; i++) {
             var button = new Surface({
-                content: i + "",
+                content: j*2+1+i + "",
                 properties: {
                     backgroundColor: "hsl(" + (i * 360 / this.options.numButtons) + ", 100%, 50%)"
                 }
@@ -40,7 +41,7 @@ define(function(require, exports, module) {
 
             this._buttons.push(button);
         }
-        //}
+        }
         this._layout.sequenceFrom(this._buttons);
     }
 
