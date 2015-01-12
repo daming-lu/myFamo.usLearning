@@ -8,6 +8,8 @@ define(function(require, exports, module) {
 
         this._layout;
         this._buttons = [];
+        this._state;
+
 
         _createLayout.call(this);
         _createButtons.call(this);
@@ -22,28 +24,32 @@ define(function(require, exports, module) {
 
     function _createLayout() {
         this._layout = new GridLayout({
-            dimensions: [this.options.numButtons, 2], // col, row
-            gutterSize: [2,2]
+            dimensions: [this.options.numButtons, 1]
         });
 
         this.add(this._layout);
     }
 
     function _createButtons() {
-        for(var j = 0; j<2; j++) {
         for (var i = 0; i < this.options.numButtons; i++) {
             var button = new Surface({
-                content: j*2+1+i + "",
+                content: i + "",
                 properties: {
                     backgroundColor: "hsl(" + (i * 360 / this.options.numButtons) + ", 100%, 50%)"
                 }
             });
 
             this._buttons.push(button);
-        }
+            button.on('click', this.selectState.bind(this, i));
         }
         this._layout.sequenceFrom(this._buttons);
     }
+
+    ButtonBar.prototype.selectState = function(index) {
+        if (index === this._state) return;
+        this._eventOutput.emit('stateChange', index);
+        this._state = index;
+    };
 
     module.exports = ButtonBar;
 });
