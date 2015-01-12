@@ -7,7 +7,7 @@ define(function(require, exports, module) {
         View.apply(this, arguments);
 
         this.rootMod = new Modifier({
-            size: [undefined, 100] // 100 px
+            size: [200, 100] // 100 px
         });
 
         var backgroundClass = this.options.index % 2 ? 'light-gray' : 'lightest-gray';
