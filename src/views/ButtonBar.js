@@ -69,7 +69,12 @@ define(function(require, exports, module) {
         index = param.index;
         if (index === this._state) return;
         this._eventOutput.emit('stateChange', index);
+
+        if (this._state !== undefined) {
+            this._buttons[this._state].toggle();
+        }
         this._state = index;
+        this._buttons[index].toggle();
     };
 
     module.exports = ButtonBar;

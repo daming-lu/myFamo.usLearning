@@ -63,6 +63,10 @@ define(function(require, exports, module) {
 
         this.add(this.buttonModifier).add(this.buttonSurface);
     }
-
+    ButtonView.prototype.toggle = function() {
+        var opacity = this.toggleState ? 0.5 : 1;
+        this.buttonModifier.opacityFrom(opacity);
+        this.toggleState = !this.toggleState;
+    };
     module.exports = ButtonView;
 });
