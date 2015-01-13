@@ -8,5 +8,7 @@ define(function(require, exports, module) {
     var mainContext = Engine.createContext();
     var appView = new AppView(AppConfig);
 
+    mainContext.setPerspective(1000);
+
     mainContext.add(appView);
 });

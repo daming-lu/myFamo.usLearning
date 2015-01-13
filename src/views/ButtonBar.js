@@ -11,7 +11,6 @@ define(function(require, exports, module) {
         this._buttons = [];
         this._state;
 
-
         _createLayout.call(this);
         _createButtons.call(this);
 
