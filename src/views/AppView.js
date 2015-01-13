@@ -27,7 +27,7 @@ define(function(require, exports, module) {
         _createContent.call(this);
 
         this.buttonBar.on('stateChange', function(index) {
-            //this.headerLightbox.show(this.content[index]);
+            this.headerLightbox.show(this.headers[index]);
             this.contentLightbox.show(this.content[index]);
         }.bind(this));
         this.buttonBar.selectState({index:1});
@@ -37,19 +37,10 @@ define(function(require, exports, module) {
     AppView.prototype.constructor = AppView;
 
     AppView.DEFAULT_OPTIONS = {
-        headerSize: 44,
-        footerSize: 60,
-        lightboxOpts: {
-            inOpacity: 1,
-            outOpacity: 0,
-            inOrigin: [0.5, 0.5],
-            outOrigin: [0.5, 0.5],
-            showOrigin: [0.5, 0.5],
-            inTransform: Transform.thenMove(Transform.rotateX(0.9), [0, -300, -300]),
-            outTransform: Transform.thenMove(Transform.rotateZ(0.7), [0, window.innerHeight, -1000]),
-            inTransition: { duration: 650, curve: 'easeOut' },
-            outTransition: { duration: 500, curve: Easing.inCubic }
-        }
+        headerSize: undefined,
+        footerSize: undefined,
+        sections: undefined,
+        transitions: undefined
     };
 
     function _createLayout() {
@@ -74,6 +65,24 @@ define(function(require, exports, module) {
             }
         );
         this._layout.header.add(background);
+        console.log('this.options.sections');
+        console.log(this.options.sections);
+        for (var i = 0; i < this.options.sections.length; i++) {
+            var title = new Surface({
+                content: this.options.sections[i].title,
+                properties: {
+                    color: 'white',
+                    fontSize: '20px',
+                    textAlign: 'center',
+                    lineHeight: this.options.headerSize + 'px'
+                }
+            });
+
+            this.headers.push(title);
+            console.log('this.headers');
+            console.log(title);
+
+        }
     }
 
     function _createButtonBar() {
@@ -89,6 +98,7 @@ define(function(require, exports, module) {
                 content: i + '',
                 properties: {
                     backgroundColor: 'hsl(' + (i * 360 / 3) + ', 100%, 50%)'
+                    //backgroundColor: 'red'
                 }
             });
 
