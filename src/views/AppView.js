@@ -30,8 +30,7 @@ define(function(require, exports, module) {
             //this.headerLightbox.show(this.content[index]);
             this.contentLightbox.show(this.content[index]);
         }.bind(this));
-
-        this.buttonBar.selectState(1);
+        this.buttonBar.selectState({index:1});
     }
 
     AppView.prototype = Object.create(View.prototype);
@@ -81,6 +80,7 @@ define(function(require, exports, module) {
         this.buttonBar = new ButtonBar();
 
         this._layout.footer.add(this.buttonBar);
+
     }
 
     function _createContent() {
